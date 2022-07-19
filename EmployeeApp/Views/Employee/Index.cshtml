@@ -1,0 +1,47 @@
+﻿@model IEnumerable<Employee>
+
+<h1>All Employees List</h1>
+
+@using (Html.BeginForm())
+{
+    <div class="input-group">
+        @Html.TextBox("SearchByName" , null , new { @class="form-control" , @placeholder = "Search By Employee Name ..."})
+        <input type="submit" value="Search" class="btn btn-outline-success">
+        <a asp-action="Create" class="btn btn-outline-primary">Create New</a>
+
+    </div>
+}
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.ActionLink("Employee Name" , "Index" , new {sortField= "EmployeeName" , curruntSortField = ViewBag.SortField , sortDirection = ViewBag.SortDirection})</th>
+            <th>@Html.ActionLink("Employee Number" , "Index" , new {sortField= "EmployeeNumber" , curruntSortField = ViewBag.SortField , sortDirection = ViewBag.SortDirection})</th>
+            <th>@Html.ActionLink("Date Of Birth" , "Index" , new {sortField= "DOB" , curruntSortField = ViewBag.SortField , sortDirection = ViewBag.SortDirection})</th>
+            <th>@Html.ActionLink("GiringDate" , "Index" , new {sortField= "HiringDate" , curruntSortField = ViewBag.SortField , sortDirection = ViewBag.SortDirection})</th>
+            <th>@Html.ActionLink("GrossSalary" , "Index" , new {sortField= "GrossSalary" , curruntSortField = ViewBag.SortField , sortDirection = ViewBag.SortDirection})</th>
+            <th>@Html.ActionLink("NetSalary" , "Index" , new {sortField= "NetSalary" , curruntSortField = ViewBag.SortField , sortDirection = ViewBag.SortDirection})</th>
+            <th>@Html.ActionLink("DepartmentName" , "Index" , new {sortField= "DepartmentName" , curruntSortField = ViewBag.SortField , sortDirection = ViewBag.SortDirection})</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(Employee em in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => em.EmployeeName)</td>
+                <td>@Html.DisplayFor(modelItem => em.EmployeeNumber)</td>
+                <td>@Html.DisplayFor(modelItem => em.DOB)</td>
+                <td>@Html.DisplayFor(modelItem => em.HiringDate)</td>
+                <td>@Html.DisplayFor(modelItem => em.GrossSalary)</td>
+                <td>@Html.DisplayFor(modelItem => em.NetSalary)</td>
+                <td>@Html.DisplayFor(modelItem => em.DepartmentName)</td>
+                
+                <td>
+                    @Html.ActionLink("Edit" , "Edit" , new{id = em.EmployeeId})
+                    @Html.ActionLink("Delete" , "Delete" , new{id = em.EmployeeId} , new {onclick = "return confirm('Are You Sure You Want To Delete This Employee?');"})</td>
+                </tr>
+        }
+    </tbody>
+</table>
