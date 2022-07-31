@@ -12,9 +12,9 @@ namespace EmployeeApp.Controllers
     {
         HRDatabaseContext dbContext;
         
-        public EmployeeController()
+        public EmployeeController(HRDatabaseContext context)
         {
-            dbContext = new HRDatabaseContext();
+            dbContext = context;
         }
         public IActionResult Index(String sortField , String curruntSortField , SortDirection sortDirection , String SearchByName)
         {
